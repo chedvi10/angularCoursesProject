@@ -1,0 +1,27 @@
+<div class="course-details-container">
+  <div *ngIf="course" [ngClass]="{'starting-soon': isStartingSoon()}" class="course-card course-details-content">
+    <h2>{{course.name}}</h2>
+    <img [src]="course.imagePath" alt="Course Image" *ngIf="course.imagePath" class="course-image">
+    <div class="category">
+      <label for="">קטגוריה: </label>
+      <span>{{ categoryName }} </span>
+      <i class=" fas {{ categoryIcon}} "></i>
+    </div>
+
+    <p>מספר שיעורים: {{course.lessonsCount}}</p>
+    <p>תאריך התחלה: {{course.startDate | date}}</p>
+    <div class="learning-mode">
+      אופן הלמידה:
+      <i [class]="course.learningMode | learningModeIcon"></i>
+    </div>
+    <!-- <p>מרצה: {{ getLecturerDetails() | async }}</p> -->
+    <p>{{course.description}}</p>
+    <div>
+      <h3>סילבוס:</h3>
+      <ul>
+        <li *ngFor="let item of course.syllabus">{{item}}</li>
+      </ul>
+    </div>
+    <button *ngIf="checkIfLecturer()" (click)="editCourse()">עדכן פרטי קורס</button>
+  </div>
+</div>
